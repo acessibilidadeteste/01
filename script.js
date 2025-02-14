@@ -1,11 +1,14 @@
-import { client } from './prismic.js'; // Importa o client do prismic.js
+import { client } from './prismic.js'; // Certifique-se de que está importando o client corretamente
 
 async function fetchPosts() {
     try {
-        // Requisição ao Prismic para buscar os posts do tipo 'blog_post'
-        const posts = await client.getAllByType('blog_post'); // 'blog_post' é o API ID do seu Custom Type
+        // Fazendo a requisição para o Prismic
+        const posts = await client.getAllByType('blog_post'); // 'blog_post' é o API ID do seu tipo de conteúdo
 
-        renderPosts(posts);
+        // Validando a resposta no console
+        console.log("Posts recebidos:", posts); // Exibe os dados recebidos do Prismic
+
+        renderPosts(posts); // Renderiza os posts
     } catch (error) {
         console.error("Erro ao buscar posts:", error);
     }
@@ -16,11 +19,9 @@ function renderPosts(posts) {
     container.innerHTML = ""; // Limpa a área antes de renderizar os posts
 
     posts.forEach((post) => {
-        // Acessando os campos 'titulo_da_pagina' e 'uid'
-        const title = post.data.titulo_da_pagina[0].text; // Acessa o título (texto estruturado)
-        const uid = post.uid; // Acessa o 'uid' (link da página)
+        const title = post.data.titulo_da_pagina[0].text; // Acessa o título do post
+        const uid = post.uid; // Acessa o UID (link da página)
 
-        // Cria um novo elemento para cada post
         const postElement = document.createElement("div");
         postElement.classList.add("post");
         postElement.innerHTML = `
@@ -31,5 +32,5 @@ function renderPosts(posts) {
     });
 }
 
-// Executa a função assim que a página carrega
+// Chama a função quando a página for carregada
 document.addEventListener("DOMContentLoaded", fetchPosts);
