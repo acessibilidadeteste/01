@@ -1,3 +1,5 @@
+// Gerencia a conexão com o Prismic e exporta o client.
+
 import * as prismic from "@prismicio/client";
 
 export const repositoryName = "siteacessivel"; // Nome do seu repositório no Prismic
