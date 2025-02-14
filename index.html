@@ -115,6 +115,14 @@
 
 </body>
 
+<script type="module">
+    import * as prismic from "https://cdn.jsdelivr.net/npm/@prismicio/client@latest/dist/index.min.js";
+
+    const repositoryName = "siteacessivel"; // Substitua pelo seu repositório
+    const client = prismic.createClient(repositoryName);
+
+    console.log("Conexão com Prismic:", client);
+</script>
 <script type="module" src="script.js"></script>
 
 </html>
